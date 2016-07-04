@@ -4,3 +4,13 @@ target/
 /week_2_crud/create_blog_authors/M101J (1) (org.mongodb).iml
 /week_3/week_3.iml
 /week_3/.idea/
+/week_3/hw3_2/M101J (2) (org.mongodb).iml
+/week_3/hw3_1/week_3.iml
+/week_3/hw3_1/target/
+/week_2_crud/create_blog_authors/target/
+/week_2_crud/spark-freemarker-mongodb/target/
+/week_4/m101j-blog-indexes/target/
+/week_4/m101j-blog-indexes/M101J (3) (org.mongodb).iml
+*.log
+*.log.*
+

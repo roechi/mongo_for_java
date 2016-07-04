@@ -2,8 +2,14 @@ package course;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.Updates;
 import org.bson.Document;
 
+import java.time.Instant;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class BlogPostDAO {
@@ -17,9 +23,7 @@ public class BlogPostDAO {
     public Document findByPermalink(String permalink) {
 
         // XXX HW 3.2,  Work Here
-        Document post = null;
-
-
+        Document post = postsCollection.find(Filters.eq("permalink", permalink)).first();
 
         return post;
     }
@@ -30,7 +34,11 @@ public class BlogPostDAO {
 
         // XXX HW 3.2,  Work Here
         // Return a list of DBObjects, each one a post from the posts collection
-        List<Document> posts = null;
+        List<Document> posts = postsCollection
+                .find()
+                .sort(Sorts.descending("date"))
+                .limit(limit)
+                .into(new LinkedList<Document>());
 
         return posts;
     }
@@ -56,9 +64,16 @@ public class BlogPostDAO {
         // - we created the permalink for you above.
 
         // Build the post object and insert it
-        Document post = new Document();
+        Document post = new Document()
+                .append("title", title)
+                .append("author", username)
+                .append("body", body)
+                .append("permalink", permalink)
+                .append("tags", tags)
+                .append("comments", new LinkedList<Document>())
+                .append("date", Date.from(Instant.now()));
 
-
+        postsCollection.insertOne(post);
         return permalink;
     }
 
@@ -83,5 +98,16 @@ public class BlogPostDAO {
         // - email is optional and may come in NULL. Check for that.
         // - best solution uses an update command to the database and a suitable
         //   operator to append the comment on to any existing list of comments
+
+        Document comment = new Document("author", name).append("body", body);
+        if (email != null) {
+            comment.append("email", email);
+        }
+
+        Document post = findByPermalink(permalink);
+        postsCollection.updateMany(
+                new Document("_id", post.get("_id")),
+                Updates.addToSet("comments", comment)
+        );
     }
 }
