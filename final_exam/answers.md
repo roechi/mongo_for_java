@@ -2,11 +2,12 @@
 
 ### Question 1
 
-```json
+```bash
     db.messages.find({"headers.From":"andrew.fastow@enron.com", "headers.To":"jeff.skilling@enron.com"}).count()
+    > 3
 ```
 
-Solution: 3
+
 
 ### Question 2
 
