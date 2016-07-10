@@ -3,8 +3,8 @@
 ### Question 1
 
 ```bash
-    db.messages.find({"headers.From":"andrew.fastow@enron.com", "headers.To":"jeff.skilling@enron.com"}).count()
-    > 3
+    > db.messages.find({"headers.From":"andrew.fastow@enron.com", "headers.To":"jeff.skilling@enron.com"}).count()
+    3
 ```
 
 
