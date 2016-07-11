@@ -65,11 +65,11 @@ Solution in ```BlogPostDao.java```:
  
 ###  Question 5
 
-[ ] _id_
-[x] a_1_b_1
-[x] a_1_b_1_c_-1
-[x] a_1_c_1
-[x] c_1
+- ```[ ]``` _id_
+- ```[x]``` a_1_b_1
+- ```[x]``` a_1_b_1_c_-1
+- ```[x]``` a_1_c_1
+- ```[x]``` c_1
 
 ### Question 6
 
